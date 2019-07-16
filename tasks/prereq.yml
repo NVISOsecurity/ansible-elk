@@ -1,0 +1,23 @@
+---
+- name: Install prerequisite packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - gnupg 
+    - openjdk-8-jdk
+
+- name: Add Elasticsearch Apt signing key
+  apt_key:
+    id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Elasticsearch repository
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+    state: present
+
+- name: Update Apt cache
+  apt:
+    update_cache: true

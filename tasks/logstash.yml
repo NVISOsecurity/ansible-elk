@@ -1,0 +1,12 @@
+- name: Install Logstash
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - logstash
+
+- name: enable logstash service
+  service:
+    name: logstash
+    state: started
+    enabled: yes 

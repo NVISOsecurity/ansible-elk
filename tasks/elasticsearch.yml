@@ -1,0 +1,18 @@
+---
+- name: Install Elasticsearch
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - elasticsearch 
+
+- name: set elasticsearch.yml
+  lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    line : "network.host: [_local_, _site_]"
+
+- name: enable elasticsearch service
+  service:
+    name: elasticsearch
+    state: started
+    enabled: yes
