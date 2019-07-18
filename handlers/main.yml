@@ -1,0 +1,30 @@
+---
+- name: reload elasticsearch
+  systemd:
+    daemon_reload: yes
+    name: elasticsearch
+
+- name: restart elasticsearch
+  systemd:
+    state: restarted
+    name: elasticsearch
+
+- name: reload kibana
+  systemd:
+    daemon_reload: yes
+    name: kibana
+
+- name: restart kibana
+  systemd:
+    state: restarted
+    name: kibana
+
+- name: reload logstash
+  systemd:
+    daemon_reload: yes
+    name: logstash
+
+- name: restart logstash
+  systemd:
+    state: restarted
+    name: logstash

@@ -10,3 +10,54 @@
     name: logstash
     state: started
     enabled: yes 
+
+- name: create logstash templates directory
+  file:
+    path: /usr/share/logstash/templates
+    state: directory
+    mode: 0755
+    group: logstash
+    owner: logstash
+
+- name: create winlogbeat pipeline from template
+  template:
+    dest: /etc/logstash/conf.d/winlogbeat.conf
+    src: winlogbeat.conf.j2
+  notify: "restart logstash"
+
+- name: create auditbeat pipeline from template
+  template:
+    dest: /etc/logstash/conf.d/auditbeat.conf
+    src: auditbeat.conf.j2
+  notify: "restart logstash"
+
+- name: create syslog pipeline from template
+  template:
+    dest: /etc/logstash/conf.d/syslog.conf
+    src: syslog.conf.j2
+  notify: "restart logstash"
+
+- name: "copy syslog template"
+  copy:
+    dest: /usr/share/logstash/templates/syslog.json
+    src: files/syslog_template.json
+    owner: logstash
+    group: logstash
+    mode: 0755
+
+- name: "copy syslog template"
+  copy:
+    dest: /usr/share/logstash/templates/winlogbeat.json
+    src: files/winlogbeat_template.json
+    owner: logstash
+    group: logstash
+    mode: 0755
+
+- name: "copy auditbeat template"
+  copy:
+    dest: /usr/share/logstash/templates/auditbeat.json
+    src: files/auditbeat_template.json
+    owner: logstash
+    group: logstash
+    mode: 0755
+    

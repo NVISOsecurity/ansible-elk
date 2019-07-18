@@ -6,3 +6,7 @@
 - include: logstash.yml
 
 - include: kibana.yml
+
+- include: docker.yml
+
+- include: elastic-hq.yml

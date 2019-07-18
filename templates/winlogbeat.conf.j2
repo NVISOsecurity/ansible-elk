@@ -1,0 +1,22 @@
+input {
+  beats {
+    port => 5044
+    tags => ["winlogbeat"]
+  }
+}
+
+filter {
+  # filters would go here once you have need for them
+}
+
+output {
+  if "winlogbeat" in [tags] {
+    elasticsearch {
+      hosts => ["http://localhost:9200"]
+      index => "winlogbeat-%{+YYYY.MM}"
+      template => "/usr/share/logstash/templates/winlogbeat.json"
+      template_name => "winlogbeat"
+      template_overwrite => "false"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+- name: start elastic-hq container
+  docker_container:
+    name: elastic-hq
+    image: elastichq/elasticsearch-hq
+    ports:
+    - "5000:5000"

@@ -1,0 +1,22 @@
+input {
+  syslog {
+    port => 1514
+    type => "syslog"
+  }
+}
+
+filter {
+  # filters would go here once you have need for them
+}
+
+output {
+  if [type] == "syslog" {
+    elasticsearch {
+      hosts => ["http://localhost:9200"]
+      index => "syslog-%{+YYYY.MM}"
+      template => "/usr/share/logstash/templates/syslog.json"
+      template_name => "syslog"
+      template_overwrite => "false"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+input {
+  beats {
+    port => 5045
+    type => "auditbeat"
+  }
+}
+
+filter {
+  # filters would go here once you have need for them
+}
+
+output {
+  if [type] == "auditbeat" {
+    elasticsearch {
+      hosts => ["http://localhost:9200"]
+      index => "auditbeat-%{+YYYY.MM}"
+      template => "/usr/share/logstash/templates/auditbeat.json"
+      template_name => "auditbeat"
+      template_overwrite => "false"
+    }
+  }
+}

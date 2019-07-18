@@ -4,8 +4,13 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - gnupg 
     - openjdk-8-jdk
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+    - python3-pip
 
 - name: Add Elasticsearch Apt signing key
   apt_key:
@@ -21,3 +26,4 @@
 - name: Update Apt cache
   apt:
     update_cache: true
+
