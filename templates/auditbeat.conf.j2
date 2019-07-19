@@ -1,7 +1,7 @@
 input {
   beats {
     port => 5045
-    type => "auditbeat"
+    tags => ["auditbeat"]
   }
 }
 
@@ -10,7 +10,7 @@ filter {
 }
 
 output {
-  if [type] == "auditbeat" {
+  if "auditbeat" in [tags] {
     elasticsearch {
       hosts => ["http://localhost:9200"]
       index => "auditbeat-%{+YYYY.MM}"
