@@ -19,24 +19,6 @@
     group: logstash
     owner: logstash
 
-- name: create winlogbeat pipeline from template
-  template:
-    dest: /etc/logstash/conf.d/winlogbeat.conf
-    src: winlogbeat.conf.j2
-  notify: "restart logstash"
-
-- name: create auditbeat pipeline from template
-  template:
-    dest: /etc/logstash/conf.d/auditbeat.conf
-    src: auditbeat.conf.j2
-  notify: "restart logstash"
-
-- name: create syslog pipeline from template
-  template:
-    dest: /etc/logstash/conf.d/syslog.conf
-    src: syslog.conf.j2
-  notify: "restart logstash"
-
 - name: "copy syslog template"
   copy:
     dest: /usr/share/logstash/templates/syslog.json
@@ -60,4 +42,21 @@
     owner: logstash
     group: logstash
     mode: 0755
-    
+
+- name: create winlogbeat pipeline from template
+  template:
+    dest: /etc/logstash/conf.d/winlogbeat.conf
+    src: winlogbeat.conf.j2
+  notify: "restart logstash"
+
+- name: create auditbeat pipeline from template
+  template:
+    dest: /etc/logstash/conf.d/auditbeat.conf
+    src: auditbeat.conf.j2
+  notify: "restart logstash"
+
+- name: create syslog pipeline from template
+  template:
+    dest: /etc/logstash/conf.d/syslog.conf
+    src: syslog.conf.j2
+  notify: "restart logstash"    
