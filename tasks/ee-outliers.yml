@@ -1,0 +1,29 @@
+- name: git clone ee-outliers
+  git:
+    repo: https://github.com/NVISO-BE/ee-outliers.git
+    dest: "{{ outliers_dir }}"
+    update: true
+  become: yes
+
+- name: set outliers configfile
+  lineinfile:
+    path: "{{ outliers_dir }}/defaults/outliers.conf"
+    regexp: '^es_url='
+    line: "es_url={{es_url}}:{{es_port}}"
+
+- name: build outliers image
+  docker_image:
+    name: outliers-dev
+    tag: latest
+    build:
+      path: "{{ outliers_dir }}"
+      pull: yes
+    source: build
+
+# docker run --network=sensor_network -v "$PWD/defaults:/mappedvolumes/config" -d outliers-dev:latest python3 outliers.py daemon --config /mappedvolumes/config/outliers.conf
+- name: start outliers container
+  docker_container:
+    name: outliers-dev
+    image: outliers-dev:latest
+    command: python3 outliers.py daemon --config /mappedvolumes/config/outliers.conf
+    volumes: "{{ outliers_dir }}/defaults:/mappedvolumes/config"

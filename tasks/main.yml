@@ -10,3 +10,7 @@
 - include: docker.yml
 
 - include: elastic-hq.yml
+
+- include: ee-outliers.yml
+  tags:
+  - outliers
