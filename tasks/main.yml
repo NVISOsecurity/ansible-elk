@@ -14,3 +14,7 @@
 - include: ee-outliers.yml
   tags:
   - outliers
+
+- include: sigma.yml
+  tags:
+  - sigma

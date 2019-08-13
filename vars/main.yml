@@ -1,2 +1,3 @@
 outliers_dir: "/var/ee-outliers"
 outliers_version: 
+sigma_dir: "/var/sigma"

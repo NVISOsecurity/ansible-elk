@@ -1,0 +1,42 @@
+- name: check if sigma plugin is already installed
+  command: /usr/share/kibana/bin/kibana-plugin list
+  register: result
+
+- name: git clone SigmaUI
+  git:
+    repo: https://github.com/socprime/SigmaUI.git
+    dest: "{{ sigma_dir }}"
+    update: true
+  become: yes
+  when: result.stdout is not search('socprime_sigma_ui')
+
+- name: Unzip sigma_ui_0.9.2
+  unarchive:
+    src: "{{ sigma_dir }}/sigma_ui_0.9.2.zip"
+    dest: "{{ sigma_dir }}"
+    remote_src: yes
+  when: result.stdout is not search('socprime_sigma_ui')
+
+- name:
+  lineinfile:
+    path: "{{ sigma_dir }}/kibana/socprime_sigma_ui/package.json"
+    regexp: '    "version": "6.6.1",'
+    line: '    "version": "6.8.1",'
+  when: result.stdout is not search('socprime_sigma_ui')
+
+- name: "Create a zip archive of {{ sigma_dir }}/kibana"
+  archive:
+    path: "{{ sigma_dir }}/kibana"
+    dest: "{{ sigma_dir }}/sigma_ui.zip"
+    format: zip
+  when: result.stdout is not search('socprime_sigma_ui')
+
+- name: install sigma.zip
+  command: "/usr/share/kibana/bin/kibana-plugin install  file:{{ sigma_dir }}/sigma_ui.zip"
+  notify: restart kibana
+  when: result.stdout is not search('socprime_sigma_ui')
+
+- name: "remove {{ sigma_dir }}"
+  file:
+    state: absent
+    path: "{{ sigma_dir }}"
