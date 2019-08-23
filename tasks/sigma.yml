@@ -1,3 +1,10 @@
+- name: Install unzip
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - unzip 
+
 - name: check if sigma plugin is already installed
   command: /usr/share/kibana/bin/kibana-plugin list
   register: result
@@ -21,7 +28,7 @@
   lineinfile:
     path: "{{ sigma_dir }}/kibana/socprime_sigma_ui/package.json"
     regexp: '    "version": "6.6.1",'
-    line: '    "version": "6.8.1",'
+    line: '    "version": "6.8.2",'
   when: result.stdout is not search('socprime_sigma_ui')
 
 - name: "Create a zip archive of {{ sigma_dir }}/kibana"

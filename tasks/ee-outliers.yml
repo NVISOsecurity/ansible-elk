@@ -3,6 +3,7 @@
     repo: https://github.com/NVISO-BE/ee-outliers.git
     dest: "{{ outliers_dir }}"
     update: true
+    force: yes
   become: yes
 
 - name: set outliers configfile
