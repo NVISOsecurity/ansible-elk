@@ -11,20 +11,6 @@
     path: /etc/elasticsearch/elasticsearch.yml
     line : "network.host: [_local_, _site_]"
 
-# - name:
-#   lineinfile:
-#     path: /etc/elasticsearch/jvm.options
-#     regexp: '^-Xmx1g'
-#     line: "-Xmx{{es_mem}}g"
-#   notify: "restart elasticsearch"
-
-# - name:
-#   lineinfile:
-#     path: /etc/elasticsearch/jvm.options
-#     regexp: '-Xms1g'
-#     line: "-Xms{{es_mem}}g"
-#   notify: "restart elasticsearch"
-
 - name: Set Elasticsearch jvm.options
   replace:
     path: /etc/elasticsearch/jvm.options
