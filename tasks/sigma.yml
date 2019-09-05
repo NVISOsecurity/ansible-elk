@@ -13,7 +13,7 @@
   git:
     repo: https://github.com/socprime/SigmaUI.git
     dest: "{{ sigma_dir }}"
-    update: true
+    version: "{{ sigma_version }}"
   become: yes
   when: result.stdout is not search('socprime_sigma_ui')
 
@@ -28,7 +28,7 @@
   lineinfile:
     path: "{{ sigma_dir }}/kibana/socprime_sigma_ui/package.json"
     regexp: '    "version": "6.6.1",'
-    line: '    "version": "6.8.2",'
+    line: "    \"version\": \"{{ es_version }}\","
   when: result.stdout is not search('socprime_sigma_ui')
 
 - name: "Create a zip archive of {{ sigma_dir }}/kibana"

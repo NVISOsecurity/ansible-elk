@@ -3,7 +3,7 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - kibana 
+    - "kibana={{ es_version }}"
 
 - name: set kibana.yml
   lineinfile:

@@ -4,7 +4,7 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - elasticsearch 
+    - "elasticsearch={{ es_version }}"
 
 - name: set elasticsearch.yml
   lineinfile:

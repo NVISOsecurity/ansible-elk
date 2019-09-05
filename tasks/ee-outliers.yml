@@ -4,6 +4,7 @@
     dest: "{{ outliers_dir }}"
     update: true
     force: yes
+    version: 1be22ea153ae829a2c2bb91d59dd9f0c4217fb9a
   become: yes
 
 - name: set outliers configfile

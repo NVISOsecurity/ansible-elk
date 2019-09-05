@@ -3,7 +3,7 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - logstash
+    - "logstash=1:{{ es_version }}-1"
 
 - name: enable logstash service
   service:
