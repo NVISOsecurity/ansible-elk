@@ -15,3 +15,15 @@
     name: kibana
     state: started
     enabled: yes
+
+- set_fact:
+    export: "{{ role_path}}/files/export.json"
+    
+- name: Import Kibana Saved Objects
+  uri:
+    url: http://localhost:5601/api/saved_objects/_bulk_create
+    method: POST
+    body_format: json
+    body: "{{ lookup('file', export) }}"
+    headers:
+      kbn-xsrf: true
