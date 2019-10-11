@@ -27,3 +27,16 @@
     body: "{{ lookup('file', export) }}"
     headers:
       kbn-xsrf: true
+  register: result
+  retries: 20
+  delay: 30
+  until: result is success
+
+- name: Set Default Index Pattern
+  uri:
+    url: http://localhost:5601/api/kibana/settings
+    method: POST
+    body_format: json
+    body: {"changes":{"defaultIndex": "winlogbeat*"}}
+    headers:
+      kbn-xsrf: true
