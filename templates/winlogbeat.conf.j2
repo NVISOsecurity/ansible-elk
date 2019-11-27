@@ -14,9 +14,10 @@ output {
     elasticsearch {
       hosts => ["http://localhost:9200"]
       index => "winlogbeat-%{+YYYY.MM}"
-      template => "/usr/share/logstash/templates/winlogbeat.json"
-      template_name => "winlogbeat"
-      template_overwrite => "false"
+      # Forcing to use the default template to fix case (in)sensitive issues
+      #template => "/usr/share/logstash/templates/winlogbeat.json"
+      #template_name => "winlogbeat"
+      #template_overwrite => "false"
     }
   }
 }
