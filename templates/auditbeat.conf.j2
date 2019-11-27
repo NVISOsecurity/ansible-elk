@@ -14,9 +14,9 @@ output {
     elasticsearch {
       hosts => ["http://localhost:9200"]
       index => "auditbeat-%{+YYYY.MM}"
-      template => "/usr/share/logstash/templates/auditbeat.json"
-      template_name => "auditbeat"
-      template_overwrite => "false"
+      #template => "/usr/share/logstash/templates/auditbeat.json"
+      #template_name => "auditbeat"
+      #template_overwrite => "false"
     }
   }
 }
