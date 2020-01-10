@@ -12,9 +12,10 @@
 - include: elastic-hq.yml
 
 - include: ee-outliers.yml
+  when: eeoutliers
   tags:
   - outliers
-
+  
 - include: sigma.yml
   tags:
   - sigma

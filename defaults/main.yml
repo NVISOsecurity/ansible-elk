@@ -4,3 +4,4 @@ es_url: http://127.0.0.1
 es_port: 9200
 es_version: 6.8.2
 sigma_version: 9626c13d5d6e4dfe9d458cc71070afd658bae349
+eeoutliers: true
