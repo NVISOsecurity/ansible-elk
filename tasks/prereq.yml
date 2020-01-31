@@ -1,17 +1,4 @@
 ---
-- name: Install prerequisite packages
-  apt:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - openjdk-8-jdk
-    - apt-transport-https
-    - ca-certificates
-    - curl
-    - gnupg-agent
-    - software-properties-common
-    - python3-pip
-
 - name: Add Elasticsearch Apt signing key
   apt_key:
     id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
@@ -26,4 +13,17 @@
 - name: Update Apt cache
   apt:
     update_cache: true
+
+- name: Install prerequisite packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - openjdk-8-jdk
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+    - python3-pip
 
